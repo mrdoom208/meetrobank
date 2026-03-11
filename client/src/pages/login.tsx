@@ -268,13 +268,13 @@ export default function Login() {
 
           {/* Links - outside form to avoid submit */}
           <div className="flex justify-between mt-1 font-bold text-blue-900 text-[12.8px] py-1 border-b-1 border-gray-400/50">
-            <a href="#">Sign up</a>
+            <a href="/signup">Sign up</a>
             <a href="/recoveraccess">Recover access</a>
           </div>
 
           <div className="text-center my-4 text-[12.8px] text-[#808080] ">
             Lost your device?{" "}
-            <a href="#" className="text-blue-900 font-bold">
+            <a href="blockyouraccount" className="text-blue-900 font-bold">
               Block your account
             </a>
           </div>
