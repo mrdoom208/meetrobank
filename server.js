@@ -51,8 +51,4 @@ app.use(express.json());
 app.use("/api/users", userRoutes);
 app.use("/api/passcode", passcodeRoutes);
 
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "client/dist/index.html"));
-});
-
 module.exports = app;
