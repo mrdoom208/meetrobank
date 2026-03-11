@@ -7,10 +7,41 @@ dotenv.config();
 
 const dblink = process.env.MONGO_URI;
 
+// ✅ PRODUCTION: Cached MongoDB connection for Vercel serverless
+let cached = { conn: null, promise: null };
+
+const connectToDatabase = async () => {
+  if (cached.conn) {
+    return cached.conn;
+  }
+
+  if (!cached.promise) {
+    const opts = {
+      bufferCommands: false,
+    };
+
+    cached.promise = mongoose.connect(dblink, opts).then((mongoose) => {
+      return mongoose;
+    });
+  }
+  cached.conn = await cached.promise;
+  return cached.conn;
+};
+
 const userRoutes = require("./routes/user");
 const passcodeRoutes = require("./routes/passcode");
 
 const app = express();
+
+// ✅ Connect DB on first request (serverless cold start)
+app.use(async (req, res, next) => {
+  try {
+    await connectToDatabase();
+    next();
+  } catch (e) {
+    res.status(500).json({ error: "Database connection failed" });
+  }
+});
 
 // Middleware
 app.use(cors());
@@ -20,5 +51,4 @@ app.use(express.json());
 app.use("/api/users", userRoutes);
 app.use("/api/passcode", passcodeRoutes);
 
-// ✅ Vercel Serverless: Export app (NO app.listen in production)
 module.exports = app;
