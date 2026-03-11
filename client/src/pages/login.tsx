@@ -166,14 +166,21 @@ export default function Login() {
         </h1>
 
         {/* Login Card */}
-        <div className="bg-[#e7e5e6] shadow-[0_3px_8px_rgba(0,0,0,0.08)] rounded-xl  w-[320px] p-4 z-10">
+        {/* Replace the login card div with this - SAME CSS */}
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleSubmit();
+          }}
+          className="bg-[#e7e5e6] shadow-[0_3px_8px_rgba(0,0,0,0.08)] rounded-xl w-[320px] p-4 z-10"
+        >
           {/* Logo */}
           <div className="flex justify-center">
             <img src={`${name}`} alt="Logo" className="h-7" />
           </div>
 
           {/* Username */}
-          <div className="   ">
+          <div className="  ">
             <div className="flex items-center py-2">
               <User size={24} className="text-gray-400 mr-2" />
               <div className="w-full">
@@ -183,15 +190,14 @@ export default function Login() {
                   onChange={(e) => setUsername(e.target.value)}
                   onBlur={() => setUsernameFocus(true)}
                   className={`outline-none w-full border-b-1 hover:border-b-2 bg-transparent text-[0.9rem] pt-[6px] pb-[7px] 
-              focus:border-b-2 placeholder:font-medium placeholder:text-gray-400
-              ${
-                usernameFocus && username === ""
-                  ? "border-[#f44336] border-b-2"
-                  : "border-gray-400 focus:border-blue-900"
-              }`}
+          focus:border-b-2 placeholder:font-medium placeholder:text-gray-400
+          ${
+            usernameFocus && username === ""
+              ? "border-[#f44336] border-b-2"
+              : "border-gray-400 focus:border-blue-900"
+          }`}
                   placeholder="Username"
                 />
-
                 {usernameFocus && username === "" && (
                   <p className="text-red-500 text-xs mt-1 text-left">
                     Please enter your username.
@@ -213,22 +219,22 @@ export default function Login() {
                     onChange={(e) => setPassword(e.target.value)}
                     onBlur={() => setPasswordFocus(true)}
                     className={`outline-none w-full bg-transparent text-sm placeholder:font-medium placeholder:text-gray-400 border-b-1 hover:border-b-2 focus:border-b-2 py-[6px]
-                    ${passwordFocus && password === "" ? "border-b-2 border-red-500" : "border-gray-400 focus:border-blue-900"}`}
+            ${passwordFocus && password === "" ? "border-b-2 border-red-500" : "border-gray-400 focus:border-blue-900"}`}
                     placeholder="Password"
                   />
                   <motion.button
                     type="button"
                     title={`${showPassword ? "hide" : "show"} `}
-                    className={`outline-none absolute rounded-full py-2 px-3 top-0 right-0 ${showPassword ? "text-blue-900" : "text-gray-400"} cursor-pointer`} // Fixed positioning
+                    className={`outline-none absolute rounded-full py-2 px-3 top-0 right-0 ${showPassword ? "text-blue-900" : "text-gray-400"} cursor-pointer`}
                     whileHover={{
                       background: "rgba(0, 0, 0, 0.26)",
                     }}
                     whileFocus={{ background: "rgba(0, 0, 0, 0.26)" }}
                     whileTap={{
                       background: "rgba(0, 0, 0, 0.26)",
-                      scale: 1.15, // ← Grows 15% from center
-                    }} // Press feedback
-                    transition={{ type: "spring", stiffness: 100 }} // Snappier
+                      scale: 1.15,
+                    }}
+                    transition={{ type: "spring", stiffness: 100 }}
                     onClick={() => setShowPassword(!showPassword)}
                   >
                     <FontAwesomeIcon icon={faEye} />
@@ -243,17 +249,15 @@ export default function Login() {
             </div>
           </div>
 
-          {/* Login Button */}
+          {/* Login Button - ONLY changed type="submit" */}
           <button
+            type="submit"
             className={`w-full text-4 py-2 rounded-lg flex justify-center items-center ${
               username != "" && password != ""
                 ? "bg-[#001a88] text-white shadow-[0_1px_5px_0px_rgba(0,0,0,0.2),0_2px_2px_0px_rgba(0,0,0,0.14),0_3px_1px_-2px_rgba(0,0,0,0.12)]"
                 : "bg-[#cacaca] text-gray-400"
             }`}
-            disabled={username == "" && password == ""}
-            onClick={() => {
-              handleSubmit();
-            }}
+            disabled={username == "" || password == ""} // Fixed logic
           >
             {loading ? (
               <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
@@ -262,7 +266,7 @@ export default function Login() {
             )}
           </button>
 
-          {/* Links */}
+          {/* Links - outside form to avoid submit */}
           <div className="flex justify-between mt-1 font-bold text-blue-900 text-[12.8px] py-1 border-b-1 border-gray-400/50">
             <a href="#">Sign up</a>
             <a href="/recoveraccess">Recover access</a>
@@ -274,7 +278,7 @@ export default function Login() {
               Block your account
             </a>
           </div>
-        </div>
+        </form>
       </motion.div>
       {/* Decorative gradient bottom */}
       <div className="absolute bottom-6  bg-cover flex items-center justify-center px-4">
