@@ -1,5 +1,5 @@
 // src/hooks/usePasscodes.ts
-import { useState, useEffect } from "react";
+import { useState} from "react";
 import axios, { AxiosError } from "axios";
 
 // Passcode interface matches your MongoDB schema
