@@ -2,9 +2,9 @@
   "version": 2,
   "builds": [
     {
-      "src": "client/package.json",  // ← Point directly to client
+      "src": "client/package.json",
       "use": "@vercel/static-build",
-      "config": { "distDir": "dist" }  // ← Relative to client/
+      "config": { "distDir": "dist" }
     },
     {
       "src": "server.js",
