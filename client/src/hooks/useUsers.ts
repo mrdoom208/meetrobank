@@ -85,11 +85,6 @@ export default function useUsers() {
     }
   };
 
-  // Fetch users on first render
-  useEffect(() => {
-    fetchUsers();
-  }, []);
-
   return {
     users,
     loading,

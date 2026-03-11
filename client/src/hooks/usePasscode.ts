@@ -85,9 +85,6 @@ export default function usePasscodes() {
   };
 
   // Fetch passcodes on first render
-  useEffect(() => {
-    fetchPasscodes();
-  }, []);
 
   return {
     passcodes,
