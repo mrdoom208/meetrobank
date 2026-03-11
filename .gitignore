@@ -8,8 +8,9 @@ pnpm-debug.log*
 lerna-debug.log*
 
 node_modules
-metrobank/node_modules
-metrobank/.env
+client/dist
+client/node_modules
+client/.env
 dist-ssr
 *.local
 .env
