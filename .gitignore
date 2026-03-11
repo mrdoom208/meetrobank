@@ -12,6 +12,7 @@ metrobank/node_modules
 metrobank/.env
 dist-ssr
 *.local
+.env
 
 # Editor directories and files
 .vscode/*
