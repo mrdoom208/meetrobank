@@ -1,5 +1,5 @@
 // src/hooks/useUsers.ts
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import axios, { AxiosError } from "axios";
 
 // User interface

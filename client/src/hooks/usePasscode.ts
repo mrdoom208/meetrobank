@@ -84,8 +84,6 @@ export default function usePasscodes() {
     }
   };
 
-  // Fetch passcodes on first render
-
   return {
     passcodes,
     loading,
